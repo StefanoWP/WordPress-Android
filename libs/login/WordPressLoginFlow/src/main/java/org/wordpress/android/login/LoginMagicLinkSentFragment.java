@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.wordpress.android.analytics.AnalyticsTracker;
+import javax.inject.Inject;
 
 public class LoginMagicLinkSentFragment extends Fragment {
     public static final String TAG = "login_magic_link_sent_fragment_tag";
@@ -24,6 +24,8 @@ public class LoginMagicLinkSentFragment extends Fragment {
     private LoginListener mLoginListener;
 
     private String mEmail;
+
+    protected @Inject LoginAnalyticsListener mAnalyticsListener;
 
     public static LoginMagicLinkSentFragment newInstance(String email) {
         LoginMagicLinkSentFragment fragment = new LoginMagicLinkSentFragment();
@@ -82,7 +84,7 @@ public class LoginMagicLinkSentFragment extends Fragment {
         }
 
         if (savedInstanceState == null) {
-            mLoginListener.track(AnalyticsTracker.Stat.LOGIN_MAGIC_LINK_OPEN_EMAIL_CLIENT_VIEWED);
+            mAnalyticsListener.trackMagicLinkOpenEmailClientViewed();
         }
     }
 
